@@ -1,4 +1,4 @@
-// ini 
+// this is a test
 import mongoose, { Schema } from 'mongoose'; // Import Schema
 import dotenv from 'dotenv';
 

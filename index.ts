@@ -1,4 +1,4 @@
-// index.ts
+// this is for express
 import express, { type Request, type Response } from 'express';
 import formData from 'express-form-data';
 import fileUpload from 'express-fileupload';
