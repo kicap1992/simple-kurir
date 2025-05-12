@@ -1,4 +1,4 @@
-// this is a test
+// this is for connecting to the database
 import mongoose, { Schema } from 'mongoose'; // Import Schema
 import dotenv from 'dotenv';
 
@@ -29,8 +29,8 @@ export async function testDatabaseConnection() {
     console.log('Inserted data:', insertedData);
 
     // Disconnect from the database
-    await mongoose.disconnect();
-    console.log('MongoDB Disconnected.');
+    // await mongoose.disconnect();
+    // console.log('MongoDB Disconnected.');
 
   } catch (error) {
     console.error('MongoDB Connection or Test Failed:', error);

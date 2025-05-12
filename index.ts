@@ -1,6 +1,6 @@
-// this is for express
+// ini adalah file utama dari aplikasi ini
 import express, { type Request, type Response } from 'express';
-import formData from 'express-form-data';
+// import formData from 'express-form-data';
 import fileUpload from 'express-fileupload';
 import  {testDatabaseConnection} from './connection';
 import path from 'path';
@@ -21,10 +21,10 @@ const port = process.env.PORT || 3011;
 
 
 // Serve static files from the 'assets' directory
-app.use('/assets', express.static(path.join(__dirname, '../assets')));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 // Middleware for express-form-data
-app.use(formData.parse());
+// app.use(formData.parse());
 
 app.use(fileUpload({
     createParentPath: true, // Creates the parent directory if it doesn't exist
