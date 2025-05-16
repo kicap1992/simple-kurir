@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Pendaftaran Penguna</title>
+	<link rel="stylesheet" href="/styles/style.min.css">
+
+	<!-- Waves Effect -->
+	<link rel="stylesheet" href="/plugin/waves/waves.min.css">
+	<!-- Toastr -->
+	<link rel="stylesheet" href="/plugin/toastr/toastr.css">
+
+</head>
+
+<body>
+
+	<div id="single-wrapper">
+		<form action="#" class="frm-single">
+			<div class="inside">
+				<div class="title"><strong>Shenior</strong> Kurir</div>
+				<!-- /.title -->
+				<div class="frm-title">Pendaftaran Pengguna</div>
+				<!-- /.frm-title -->
+				<div class="frm-input"><input id="no_telpon" type="text" placeholder="No Telpon" class="frm-inp"
+						oninput="numberOnly(this)" maxlength="13" minlength="11"><i class="fa fa-phone frm-ico"></i>
+				</div>
+				<!-- /.frm-input -->
+				<div class="frm-input"><input id="nama" type="text" placeholder="Nama" class="frm-inp"><i
+						class="fa fa-user frm-ico"></i></div>
+				<!-- /.frm-input -->
+				<div class="frm-input"><input id="password" type="password" placeholder="Password" class="frm-inp"><i
+						class="fa fa-lock frm-ico"></i></div>
+				<!-- /.frm-input -->
+				<div class="frm-input"><input id="konfirmasi_password" type="password" placeholder="Konfirmasi Password"
+						class="frm-inp"><i class="fa fa-lock frm-ico"></i></div>
+				<!-- /.frm-input -->
+
+				<button type="button" class="frm-submit" onclick="daftar()">Mendaftar<i
+						class="fa fa-arrow-circle-right"></i></button>
+				<a href="/" class="a-link"><i class="fa fa-home"></i>Kembali Ke Halaman Utama.</a>
+
+
+
+				<div class="frm-footer">Arifuddin Naawi Amanah © 2025.</div>
+				<!-- /.footer -->
+			</div>
+			<!-- .inside -->
+		</form>
+		<!-- /.frm-single -->
+	</div><!--/#single-wrapper -->
+
+	<div class="modal fade" id="modal-otp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-2">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel-2">Kode OTP</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="modal-kurir-nama">Kode OTP</label>
+						<input type="text" class="form-control" id="kode_otp" oninput="numberOnly(this)" maxlength="6"
+							placeholder="Masukkan Kode OTP ">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm waves-effect waves-light"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary btn-sm waves-effect waves-light" onclick="verifikasi()">Verifikasi</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="/script/html5shiv.min.js"></script>
+		<script src="/script/respond.min.js"></script>
+	<![endif]-->
+	<!-- 
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/scripts/jquery.min.js"></script>
+	<script src="/scripts/modernizr.min.js"></script>
+	<script src="/plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/plugin/nprogress/nprogress.js"></script>
+	<script src="/plugin/waves/waves.min.js"></script>
+
+	<!-- Toastr -->
+	<script src="/plugin/toastr/toastr.min.js"></script>
+
+	<script src="/block/jquery.blockUI.js"></script>
+
+	<script src="/scripts/main.min.js"></script>
+	<script src="/my-js.js"></script>
+	<script>
+		function daftar() {
+			const no_telpon = $("#no_telpon").val();
+			const nama = $("#nama").val();
+			const password = $("#password").val();
+			const konfirmasi_password = $("#konfirmasi_password").val();
+
+			if (no_telpon === "" || nama === "" || password === "" || konfirmasi_password === "") {
+				toastr.error("Form Harus Diisi Semua");
+				return;
+			}
+
+			// if (password.length < 8) {
+			// 	toastr.error("Password Minimal 8 Karakter");
+			// 	return;
+			// }
+
+			if (no_telpon.length < 11) {
+				toastr.error("No Telpon Minimal 11 Karakter");
+				return;
+			}
+
+			if (password !== konfirmasi_password) {
+				toastr.error("Password Tidak Sama");
+				return;
+			}
+
+			const data = {
+				no_telpon,
+				nama,
+				password
+			}
+
+			$.ajax({
+				url: "/daftar",
+				type: "POST",
+				data: JSON.stringify(data),
+				contentType: "application/json",
+				beforeSend: function () {
+					// blockUI('Pendaftaran Sedang Diproses...');
+				},
+				success: function (response) {
+					// buka modal
+					$.unblockUI();
+					toastr.info("Silahkan Lakukan Verifikasi OTP<br>Kode OTP Telah Terkirim Ke Whatsapp Nomor Telpon Anda");
+					$('#modal-otp').modal('show');
+				},
+				error: function (xhr, status, error) {
+					console.log(xhr.responseJSON);
+					toastr.error(xhr.responseJSON !== undefined ? xhr.responseJSON : "Terjadi Kesalahan Server");
+					$.unblockUI();
+					// $('#modal-otp').modal('show');
+				}
+			});
+
+
+		}
+
+
+		function verifikasi() {
+			const no_telpon = $("#no_telpon").val();
+			const kode_otp = $("#kode_otp").val();
+
+			if(kode_otp === "") {
+				toastr.error("Kode OTP Harus Diisi");
+				// point to input
+				$("#kode_otp").focus();
+				return;
+			}
+
+			const data = {
+				no_telpon,
+				kode_otp
+			}
+
+			$.ajax({
+				url: "/verifikasi",
+				type: "POST",
+				data: JSON.stringify(data),
+				contentType: "application/json",
+				beforeSend: function () {
+					// close modal
+					$('#modal-otp').modal('hide');
+					blockUI('Verifikasi Sedang Diproses...');
+
+				},
+				success: function (response) {
+					$.unblockUI();
+					toastr.success("Verifikasi Berhasil<br>Silahkan Login");
+					// 2 sec the to halaman login
+					setTimeout(() => {
+						window.location.href = "/login";
+					}, 2500);
+				},
+				error: function (xhr, status, error) {
+					toastr.error(xhr.responseJSON !== undefined ? xhr.responseJSON : "Terjadi Kesalahan Server");
+					$.unblockUI();
+					// 1 sec then show modal
+					setTimeout(() => {
+						$('#modal-otp').modal('show');
+					}, 1000);
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>

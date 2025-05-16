@@ -1,0 +1,6 @@
+2025/05/16-03:20:33.677 1e9d4 Reusing MANIFEST /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Local Storage/leveldb/MANIFEST-000001
+2025/05/16-03:20:33.747 1e9d4 Recovering log #19
+2025/05/16-03:20:33.748 1e9d4 Reusing old log /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Local Storage/leveldb/000019.log 
+2025/05/16-05:30:49.203 1e9d4 Level-0 table #24: started
+2025/05/16-05:30:49.227 1e9d4 Level-0 table #24: 15501 bytes OK
+2025/05/16-05:30:49.238 1e9d4 Delete type=0 #19

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Shenior Kurir | Pengiriman Paket</title>
+
+	<!-- Main Styles -->
+	<link rel="stylesheet" href="/styles/style.min.css">
+
+	<!-- mCustomScrollbar -->
+	<link rel="stylesheet" href="/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+	<!-- Waves Effect -->
+	<link rel="stylesheet" href="/plugin/waves/waves.min.css">
+
+	<!-- Sweet Alert -->
+	<link rel="stylesheet" href="/plugin/sweet-alert/sweetalert.css">
+
+	<link rel="stylesheet" href="/fonts/fontello/fontello.css">
+
+	<link rel="stylesheet" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="/fonts/material-design/css/materialdesignicons.css">
+
+	<link rel="stylesheet" href="/plugin/datatables/media/css/dataTables.bootstrap.min.css">
+
+	<!-- Toastr -->
+	<link rel="stylesheet" href="/plugin/toastr/toastr.css">
+	<script src="/auth.js"></script>
+</head>
+
+<body>
+	<div class="main-menu">
+		<header class="header">
+			<a href="/admin" class="logo">Shenior Kurir</a>
+			<button type="button" class="button-close fa fa-times js__menu_close"></button>
+			<div class="user">
+				<a href="#" class="avatar"><img src="/images/person.png" alt=""><span class="status online"></span></a>
+				<h5 class="name"><a href="#" id="h5-title">...</a></h5>
+				<h5 class="position">Pengguna</h5>
+
+			</div>
+			<!-- /.user -->
+		</header>
+		<!-- /.header -->
+		<div class="content">
+
+			<div class="navigation">
+				<h5 class="title">Navigasi</h5>
+				<!-- /.title -->
+				<ul class="menu js__accordion">
+					<li>
+						<a class="waves-effect" href="/user"><i class="menu-icon fa fa-home"></i><span>Halaman
+								Utama</span></a>
+					</li>
+
+					<li class="current active">
+						<a class="waves-effect" href="/user/kirim-paket"><i
+								class="menu-icon ico mdi mdi-motorbike"></i><span>Pengiriman Paket</span></a>
+					</li>
+
+					<li>
+						<a class="waves-effect" href="#" onclick="notAvailable()"><i
+								class="menu-icon ico icon-table"></i><span>History Pengiriman</span></a>
+					</li>
+
+					<li>
+						<a class="waves-effect" href="/user/profil"><i class="menu-icon ico icon-user"></i><span>Profil
+								Pengunna</span></a>
+					</li>
+
+					<li>
+						<a class="waves-effect" onclick="logout()" href="#"><i
+								class="menu-icon ico icon-logout"></i><span>Logout</span></a>
+					</li>
+				</ul>
+
+			</div>
+			<!-- /.navigation -->
+		</div>
+		<!-- /.content -->
+	</div>
+	<!-- /.main-menu -->
+
+	<div class="fixed-navbar">
+		<div class="pull-left">
+			<button type="button"
+				class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
+			<h1 class="page-title">Pengiriman Paket</h1>
+			<!-- /.page-title -->
+		</div>
+		<!-- /.pull-left -->
+		<div class="pull-right">
+
+
+			<a href="#" class="ico-item ico icon-logout" onclick="logout()"></a>
+		</div>
+		<!-- /.pull-right -->
+	</div>
+	<!-- /.fixed-navbar -->
+
+	<div id="wrapper">
+		<div class="main-content">
+			<div class="row small-spacing">
+				<div class="col-xs-12">
+					<div class="box-content card">
+						<h4 class="box-title">Form Kurir</h4>
+						<!-- /.box-title -->
+						<div class="card-content">
+							<div class="form-group">
+								<button type="button" class="btn btn-sm btn-info btn-rounded waves-effect waves-light"
+									onclick="addpaketOpenModal()">Pendaftaran Kurir Baru</button>
+							</div>
+
+
+
+						</div>
+					</div>
+					<!-- /.box-content -->
+				</div>
+
+
+
+			</div>
+			<footer class="footer">
+				<ul class="list-inline">
+					<li>Arifuddin Naawi Amanah © 2025.</li>
+					<!-- <li><a href="#">Privacy</a></li>
+				<li><a href="#">Terms</a></li>
+				<li><a href="#">Help</a></li> -->
+				</ul>
+			</footer>
+		</div>
+		<!-- /.main-content -->
+	</div><!--/#wrapper -->
+
+	<div class="modal fade" id="modal-paket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modal-paket-title">Modal title</h4>
+				</div>
+				<form class="modal-body" id="form-modal">
+					<div class="form-group">
+						<!-- show the upload -->
+						<div id="show-upload-gambar-kurir" style="display: none">
+							<center>
+								<div id="preview-gambar-kurir" style="height: 200px; width: 150px"></div>
+							</center>
+						</div>
+					</div>
+					<div class="form-group" id="form-gambar-kurir">
+						<!-- create upload -->
+						<label for="modal-kurir-nama">Photo Kurir</label>
+						<input type="file" class="form-control" id="gambar-kurir" accept="image/*"
+							onchange="showUpload(this, 'gambar-kurir')">
+					</div>
+
+					<div class="form-group">
+						<label for="modal-kurir-no-telpon">No Telpon/HP Yang Dihubungi</label>
+						<input type="text" class="form-control" id="no_telpon" oninput="numberOnly(this)" maxlength="13"
+							placeholder="Masukkan No Telpon/HP Yang Dihubungi">
+					</div>
+
+					<div class="form-group">
+						<label for="modal-kurir-alamat">Alamat Pengiriman</label>
+						<textarea name="alamat" class="form-control" id="alamat"
+							placeholder="Masukkan Alamat"></textarea>
+					</div>
+					<hr>
+
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm waves-effect waves-light"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary btn-sm waves-effect waves-light" id="btn-pengiriman"
+						onclick="tambahpengiriman()">Lakukan Pengiriman</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="/script/html5shiv.min.js"></script>
+		<script src="/script/respond.min.js"></script>
+	<![endif]-->
+	<!-- 
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/scripts/jquery.min.js"></script>
+	<script src="/scripts/modernizr.min.js"></script>
+	<script src="/plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="/plugin/nprogress/nprogress.js"></script>
+	<script src="/plugin/sweet-alert/sweetalert.min.js"></script>
+	<script src="/plugin/waves/waves.min.js"></script>
+	<!-- Full Screen Plugin -->
+	<script src="/plugin/fullscreen/jquery.fullscreen-min.js"></script>
+
+	<script src="/plugin/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="/plugin/datatables/media/js/dataTables.bootstrap.min.js"></script>
+	<script src="/plugin/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+
+	<!-- Toastr -->
+	<script src="/plugin/toastr/toastr.min.js"></script>
+
+	<script src="/block/jquery.blockUI.js"></script>
+
+	<script src="/scripts/main.min.js"></script>
+	<script src="/my-js.js"></script>
+	<script src="/socket-io/client-dist/socket.io.js"></script>
+	<script>
+		const socket = io(); // Connects to your server
+
+
+		socket.on('connect', () => {
+			console.log('Connected to server:', socket.id);
+		});
+
+
+
+	</script>
+	<script>
+		const global_data = JSON.parse(localStorage.getItem('user'));
+		document.getElementById('h5-title').innerHTML = global_data.nama;
+	</script>
+	<script>
+		function addpaketOpenModal() {
+			$('#modal-paket-title').html('Form Pengiriman Paket Baru');
+			$('#modal-paket').modal('show');
+		}
+		function tambahpengiriman() {
+			$.ajax({
+				url: '/user/kirim-paket/',
+				type: 'POST',
+				data: {},
+				beforeSend: function () {
+
+				},
+				success: function (data) {
+					console.log(data);
+					// This triggers the event
+					socket.emit('scan_dia_lagi', 'hello from paket.html');
+					$('#modal-paket').modal('hide');
+				},
+				error: function (xhr, status, error) {
+					console.log(error);
+				}
+
+			})
+		}
+	</script>
+
+
+</body>
+
+</html>

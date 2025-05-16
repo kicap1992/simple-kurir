@@ -105,10 +105,11 @@ router.post('/kurir', async (req: Request, res: Response) => {
 
         // Save to MongoDB
         const newKurir = new KurirModel({
-            dd_motor,
-            nama,
             no_telpon,
+            password : no_telpon,           
+            nama,
             jenis_kelamin,
+            dd_motor,
             gambar_kurir: `${no_telpon}_kurir_${random_5_char}.jpg`,
             gambar_motor: `${no_telpon}_motor_${random_5_char}.jpg`,
         });

@@ -12,6 +12,9 @@ function logout() {
         confirmButtonColor: "#f60e0e"
     }, function (t) {
         if (t) {
+            // remove local storage
+            localStorage.removeItem('user');
+            localStorage.removeItem('role');
             window.location.href = "/"
         }else{
             // close swal

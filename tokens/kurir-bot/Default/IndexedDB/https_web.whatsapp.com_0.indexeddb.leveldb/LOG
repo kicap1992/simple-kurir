@@ -1,0 +1,58 @@
+2025/05/16-03:20:35.820 1e9c0 Reusing MANIFEST /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/05/16-03:20:35.821 1e9c0 Recovering log #726
+2025/05/16-03:20:35.892 1e9c0 Reusing old log /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000726.log 
+2025/05/16-03:20:37.904 1e9c7 Level-0 table #740: started
+2025/05/16-03:20:37.990 1e9c7 Level-0 table #740: 562253 bytes OK
+2025/05/16-03:20:38.006 1e9c7 Delete type=0 #726
+2025/05/16-03:20:38.007 1e9bf Manual compaction at level-0 from '\x00L\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00M\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/05/16-03:20:40.618 1e9c7 Compacting 1@1 + 10@2 files
+2025/05/16-03:20:40.737 1e9c7 Generated table #741@1: 69094 keys, 2228427 bytes
+2025/05/16-03:20:40.812 1e9c7 Generated table #742@1: 9875 keys, 2173318 bytes
+2025/05/16-03:20:40.874 1e9c7 Generated table #743@1: 3002 keys, 2155151 bytes
+2025/05/16-03:20:41.030 1e9c7 Generated table #744@1: 3193 keys, 2154962 bytes
+2025/05/16-03:20:41.083 1e9c7 Generated table #745@1: 7992 keys, 2163760 bytes
+2025/05/16-03:20:41.200 1e9c7 Generated table #746@1: 30880 keys, 2244213 bytes
+2025/05/16-03:20:41.265 1e9c7 Generated table #747@1: 23173 keys, 2188776 bytes
+2025/05/16-03:20:41.374 1e9c7 Generated table #748@1: 82629 keys, 2227123 bytes
+2025/05/16-03:20:41.530 1e9c7 Generated table #749@1: 107929 keys, 2257903 bytes
+2025/05/16-03:20:41.548 1e9c7 Generated table #750@1: 6087 keys, 133658 bytes
+2025/05/16-03:20:41.548 1e9c7 Compacted 1@1 + 10@2 files => 19927291 bytes
+2025/05/16-03:20:41.556 1e9c7 compacted to: files[ 0 0 10 0 0 0 0 ]
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #733
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #736
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #732
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #740
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #734
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #737
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #728
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #730
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #729
+2025/05/16-03:20:41.557 1e9c7 Delete type=2 #731
+2025/05/16-03:20:41.558 1e9c7 Delete type=2 #735
+2025/05/16-09:36:26.980 1e9c0 Level-0 table #752: started
+2025/05/16-09:36:27.101 1e9c0 Level-0 table #752: 1306096 bytes OK
+2025/05/16-09:36:27.115 1e9c0 Delete type=0 #739
+2025/05/16-09:36:31.771 1e9c0 Compacting 1@1 + 10@2 files
+2025/05/16-09:36:31.896 1e9c0 Generated table #753@1: 72026 keys, 2231116 bytes
+2025/05/16-09:36:31.951 1e9c0 Generated table #754@1: 11094 keys, 2173644 bytes
+2025/05/16-09:36:32.032 1e9c0 Generated table #755@1: 3001 keys, 2155363 bytes
+2025/05/16-09:36:32.094 1e9c0 Generated table #756@1: 3164 keys, 2155888 bytes
+2025/05/16-09:36:32.134 1e9c0 Generated table #757@1: 5587 keys, 2159453 bytes
+2025/05/16-09:36:32.231 1e9c0 Generated table #758@1: 31720 keys, 2242356 bytes
+2025/05/16-09:36:32.301 1e9c0 Generated table #759@1: 24301 keys, 2196705 bytes
+2025/05/16-09:36:32.395 1e9c0 Generated table #760@1: 75606 keys, 2218172 bytes
+2025/05/16-09:36:32.514 1e9c0 Generated table #761@1: 107907 keys, 2259599 bytes
+2025/05/16-09:36:32.537 1e9c0 Generated table #762@1: 14575 keys, 311176 bytes
+2025/05/16-09:36:32.537 1e9c0 Compacted 1@1 + 10@2 files => 20103472 bytes
+2025/05/16-09:36:32.550 1e9c0 compacted to: files[ 0 0 10 0 0 0 0 ]
+2025/05/16-09:36:32.552 1e9c0 Delete type=2 #748
+2025/05/16-09:36:32.552 1e9c0 Delete type=2 #752
+2025/05/16-09:36:32.552 1e9c0 Delete type=2 #742
+2025/05/16-09:36:32.552 1e9c0 Delete type=2 #749
+2025/05/16-09:36:32.552 1e9c0 Delete type=2 #747
+2025/05/16-09:36:32.553 1e9c0 Delete type=2 #750
+2025/05/16-09:36:32.553 1e9c0 Delete type=2 #741
+2025/05/16-09:36:32.553 1e9c0 Delete type=2 #744
+2025/05/16-09:36:32.553 1e9c0 Delete type=2 #743
+2025/05/16-09:36:32.553 1e9c0 Delete type=2 #746
+2025/05/16-09:36:32.553 1e9c0 Delete type=2 #745

@@ -1,0 +1,3 @@
+2025/05/16-03:20:33.610 1e9c0 Reusing MANIFEST /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Sync Data/LevelDB/MANIFEST-000001
+2025/05/16-03:20:33.747 1e9c0 Recovering log #3
+2025/05/16-03:20:33.750 1e9c0 Reusing old log /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Sync Data/LevelDB/000003.log 

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Halaman Login Kurir</title>
+	<link rel="stylesheet" href="/styles/style.min.css">
+
+	<!-- Waves Effect -->
+	<link rel="stylesheet" href="/plugin/waves/waves.min.css">
+
+	<!-- Toastr -->
+	<link rel="stylesheet" href="/plugin/toastr/toastr.css">
+</head>
+
+<body>
+
+<div id="single-wrapper">
+	<form action="#" class="frm-single">
+		<div class="inside">
+			<div class="title"><strong>Shenior</strong> Kurir</div>
+			<!-- /.title -->
+			<div class="frm-title">Login Kurir</div>
+			<!-- /.frm-title -->
+			<div class="frm-input"><input type="text" id="username" placeholder="No Telpon" class="frm-inp"><i class="fa fa-user frm-ico"></i></div>
+			<!-- /.frm-input -->
+			<div class="frm-input"><input type="password" id="password" placeholder="Password" class="frm-inp"><i class="fa fa-lock frm-ico"></i></div>
+			<!-- /.frm-input -->
+			
+			<button type="button" class="frm-submit" onclick="login()">Login<i class="fa fa-arrow-circle-right"></i></button>
+
+			
+			<a href="/" class="a-link"><i class="fa fa-home"></i>Kembali Ke Halaman Utama.</a>
+			
+			<div class="frm-footer">Arifuddin Naawi Amanah © 2025.</div>
+			<!-- /.footer -->
+		</div>
+		<!-- .inside -->
+	</form>
+	<!-- /.frm-single -->
+</div><!--/#single-wrapper -->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="/script/html5shiv.min.js"></script>
+		<script src="/script/respond.min.js"></script>
+	<![endif]-->
+	<!-- 
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/scripts/jquery.min.js"></script>
+	<script src="/scripts/modernizr.min.js"></script>
+	<script src="/plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/plugin/nprogress/nprogress.js"></script>
+	<script src="/plugin/waves/waves.min.js"></script>
+
+	<!-- Toastr -->
+	<script src="/plugin/toastr/toastr.min.js"></script>
+
+	<script src="/block/jquery.blockUI.js"></script>
+
+	<script src="/scripts/main.min.js"></script>
+	<script src="/my-js.js"></script>
+	<script>
+		function login() {
+			var username = $("#username").val();
+			var password = $("#password").val();
+
+			$.ajax({
+				url: "/kurir/login",
+				type: "POST",
+				data: {
+					no_telpon: username,
+					password: password
+				},
+				beforeSend: function () {
+					blockUI('Login Sedang Diproses...');
+					
+				},
+				success: function (data) {
+					console.log(data);
+					$.unblockUI();
+					toastr.success("Login Berhasil");
+					// create local storage
+					localStorage.setItem('user', JSON.stringify(data));
+					localStorage.setItem('role', 'kurir');
+					// 2 sec the to halaman login
+					setTimeout(() => {
+						window.location.href = "/kurir";
+					}, 2500);
+				},
+				error: function (xhr, status, error) {
+					$.unblockUI();
+					toastr.error(xhr.responseJSON !== undefined ? xhr.responseJSON : "Terjadi Kesalahan Server");
+				}
+			});
+		}
+	</script>
+</body>
+</html>

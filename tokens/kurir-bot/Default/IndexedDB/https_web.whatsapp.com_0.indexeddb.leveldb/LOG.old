@@ -1,0 +1,31 @@
+2025/05/16-02:47:16.445 1b121 Reusing MANIFEST /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/05/16-02:47:16.445 1b121 Recovering log #713
+2025/05/16-02:47:16.469 1b121 Reusing old log /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000713.log 
+2025/05/16-02:47:19.255 1b121 Level-0 table #727: started
+2025/05/16-02:47:19.279 1b121 Level-0 table #727: 343537 bytes OK
+2025/05/16-02:47:19.295 1b121 Delete type=0 #713
+2025/05/16-02:47:19.300 1b126 Manual compaction at level-0 from '\x00K\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00L\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/05/16-02:47:21.833 1b126 Compacting 1@1 + 10@2 files
+2025/05/16-02:47:21.932 1b126 Generated table #728@1: 67594 keys, 2228691 bytes
+2025/05/16-02:47:22.011 1b126 Generated table #729@1: 9628 keys, 2168364 bytes
+2025/05/16-02:47:22.069 1b126 Generated table #730@1: 2998 keys, 2155552 bytes
+2025/05/16-02:47:22.142 1b126 Generated table #731@1: 3201 keys, 2154712 bytes
+2025/05/16-02:47:22.194 1b126 Generated table #732@1: 9020 keys, 2164676 bytes
+2025/05/16-02:47:22.284 1b126 Generated table #733@1: 30514 keys, 2245117 bytes
+2025/05/16-02:47:22.350 1b126 Generated table #734@1: 22719 keys, 2185441 bytes
+2025/05/16-02:47:22.461 1b126 Generated table #735@1: 86479 keys, 2232908 bytes
+2025/05/16-02:47:22.587 1b126 Generated table #736@1: 107688 keys, 2260150 bytes
+2025/05/16-02:47:22.596 1b126 Generated table #737@1: 1776 keys, 42651 bytes
+2025/05/16-02:47:22.596 1b126 Compacted 1@1 + 10@2 files => 19838262 bytes
+2025/05/16-02:47:22.609 1b126 compacted to: files[ 0 0 10 0 0 0 0 ]
+2025/05/16-02:47:22.609 1b126 Delete type=2 #721
+2025/05/16-02:47:22.610 1b126 Delete type=2 #723
+2025/05/16-02:47:22.610 1b126 Delete type=2 #718
+2025/05/16-02:47:22.610 1b126 Delete type=2 #727
+2025/05/16-02:47:22.610 1b126 Delete type=2 #716
+2025/05/16-02:47:22.610 1b126 Delete type=2 #724
+2025/05/16-02:47:22.610 1b126 Delete type=2 #715
+2025/05/16-02:47:22.610 1b126 Delete type=2 #717
+2025/05/16-02:47:22.610 1b126 Delete type=2 #722
+2025/05/16-02:47:22.610 1b126 Delete type=2 #719
+2025/05/16-02:47:22.610 1b126 Delete type=2 #720

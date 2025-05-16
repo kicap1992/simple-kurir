@@ -25,6 +25,9 @@
 
 	<link rel="stylesheet" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="/fonts/material-design/css/materialdesignicons.css">
+
+	<!-- Toastr -->
+	<link rel="stylesheet" href="/plugin/toastr/toastr.css">
 </head>
 
 <body>
@@ -214,8 +217,35 @@
 	<!-- Full Screen Plugin -->
 	<script src="/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
+	<!-- Toastr -->
+	<script src="/plugin/toastr/toastr.min.js"></script>
+
 	<script src="/scripts/main.min.js"></script>
 	<script src="/my-js.js"></script>
+	<script src="/socketnya/client-dist/socket.io.js"></script>
+	<script>
+		const socket = io(); // Connects to your server
+
+		// function sendScanDia() {
+		// 	const data = "Hello from client!";
+		// 	socket.emit('scan_dia', data);
+		// 	console.log('scan_dia sent:', data);
+		// }
+
+		// sendScanDia();
+
+		socket.on('connect', () => {
+			console.log('Connected to server:', socket.id);
+		});
+
+		socket.on('pengiriman_baru1', (data) => {
+			console.log('Received scan_dia event:', "data");
+			toastr.info("Ada Pengiriman Baru Terdaftar");
+			// console.log('Received scan_dia event:', data);
+			// Do something with the received data
+		});
+
+	</script>
 
 </body>
 </html>

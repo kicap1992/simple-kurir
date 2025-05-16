@@ -9,28 +9,28 @@ export async function testDatabaseConnection() {
     await mongoose.connect(process.env.MONGODB_URI as string);
     console.log('MongoDB Connection Successful!');
 
-    // Define a simple schema for the "test" collection
-    const testSchema = new Schema({
-      name: String,
-      value: Number,
-    });
+    // // Define a simple schema for the "test" collection
+    // const testSchema = new Schema({
+    //   name: String,
+    //   value: Number,
+    // });
 
-    // Create a model based on the schema
-    const TestModel = mongoose.model('Test', testSchema);
+    // // Create a model based on the schema
+    // const TestModel = mongoose.model('Test', testSchema);
 
-    // Insert a single document with a random value
-    const singleData = { name: 'Random Item', value: Math.floor(Math.random() * 100) }; // Random number between 0 and 99
+    // // Insert a single document with a random value
+    // const singleData = { name: 'Random Item', value: Math.floor(Math.random() * 100) }; // Random number between 0 and 99
 
-    const createdItem = await TestModel.create(singleData);
-    console.log('Single document inserted into "test" collection.', createdItem);
+    // const createdItem = await TestModel.create(singleData);
+    // console.log('Single document inserted into "test" collection.', createdItem);
 
-    // Optionally, retrieve and log the inserted data
-    const insertedData = await TestModel.find();
-    console.log('Inserted data:', insertedData);
+    // // Optionally, retrieve and log the inserted data
+    // const insertedData = await TestModel.find();
+    // console.log('Inserted data:', insertedData);
 
-    // Disconnect from the database
-    // await mongoose.disconnect();
-    // console.log('MongoDB Disconnected.');
+    // // Disconnect from the database
+    // // await mongoose.disconnect();
+    // // console.log('MongoDB Disconnected.');
 
   } catch (error) {
     console.error('MongoDB Connection or Test Failed:', error);
