@@ -1,7 +1,15 @@
 import { create, Whatsapp } from 'venom-bot';
 import express, { type Request, type Response } from 'express';
+import type { UploadedFile } from 'express-fileupload';
 
 let client: Whatsapp;
+
+function convertToPhoneNumber(number: string): number {
+  if (number.startsWith('0')) {
+    number = number.slice(1);
+  }
+  return parseInt(`62${number}`);
+}
 
 async function initBot() {
   try {
@@ -32,15 +40,8 @@ function startServer() {
 
   app.post('/send-otp', async (req: Request, res: Response) => {
     let { number, otp } = req.body;
-    
-    // remove the 0 in front of the number
-    if (number.startsWith('0')) {
-      number = number.slice(1);
-    }
-    // add +62 to the number
-    number = `+62${number}`;
-    // convert to int
-    number = parseInt(number);
+
+    number = convertToPhoneNumber(number);
     console.log(`Sending OTP ${otp} to ${number}`);
 
     const formattedNumber = `${number}@c.us`;
@@ -65,6 +66,28 @@ function startServer() {
         return;
       }
       res.status(500).json({ error: 'Failed to send OTP.' });
+    }
+  });
+
+  app.post('/send-message', async (req: Request, res: Response) => {
+    let { number, message, img_stat = false , foto_paket , foto_name} = req.body;
+
+
+    console.log(number, message, img_stat);
+
+    number = convertToPhoneNumber(number);
+
+    const formattedNumber = `${number}@c.us`;
+    try {
+      if(img_stat){
+        await client.sendImage(formattedNumber, foto_paket, foto_name, message);
+      }else{
+        await client.sendText(formattedNumber, message);
+      }
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to send message.' });
     }
   });
 

@@ -1,11 +1,20 @@
+let socket_server;
+
+if (window.location.hostname === "20.20.20.26" && window.location.port === "3011") {
+    socket_server = "http://20.20.20.26:3014";
+} else {
+    socket_server = "https://socket-shenior.mywork-kkk.online";
+}
+
+console.log("Socket server:", socket_server);
 function logout() {
     return swal({
         title: "Yakin?",
         text: "Anda akan keluar dari sistem",
-        type: "warning", 
+        type: "warning",
         showCancelButton: !0,
-        confirmButtonColor: "#DD6B55", 
-        confirmButtonText: "Ya, logout!", 
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, logout!",
         cancelButtonText: "Tidak, batal!",
         closeOnConfirm: !1,
         closeOnCancel: !1,
@@ -16,7 +25,7 @@ function logout() {
             localStorage.removeItem('user');
             localStorage.removeItem('role');
             window.location.href = "/"
-        }else{
+        } else {
             // close swal
             swal.close()
         }
@@ -75,7 +84,31 @@ function enableInput(stat) {
 
 }
 
+
+
 function numberOnly(element) { //only number and remove comma
     element.value = element.value.replace(/[^0-9]/g, '');
     element.value = element.value.replace(/,/g, '');
+}
+
+function formatToMakassar(dateString) {
+  const dateObj = new Date(dateString);
+
+  const options = {
+    timeZone: 'Asia/Makassar',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  };
+
+  const parts = new Intl.DateTimeFormat('id-ID', options).formatToParts(dateObj);
+
+  const getPart = (type) => parts.find(p => p.type === type)?.value ?? '';
+
+  // Format: DD-MM-YYYY, HH.mm.ss
+  return `${getPart('day')}-${getPart('month')}-${getPart('year')}, ${getPart('hour')}.${getPart('minute')}.${getPart('second')}`;
 }

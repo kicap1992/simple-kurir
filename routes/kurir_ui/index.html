@@ -24,6 +24,9 @@
 
 	<link rel="stylesheet" href="/fonts/fontello/fontello.css">
 
+	<!-- Toastr -->
+	<link rel="stylesheet" href="/plugin/toastr/toastr.css">
+
 	<link rel="stylesheet" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="/fonts/material-design/css/materialdesignicons.css">
 	<script src="/auth.js"></script>
@@ -66,7 +69,7 @@
 					</li> -->
 
 					<li>
-						<a class="waves-effect" href="#" onclick="notAvailable()"><i
+						<a class="waves-effect" href="/kurir/log" ><i
 								class="menu-icon ico icon-table"></i><span>Log Penghantaran</span></a>
 					</li>
 
@@ -269,6 +272,9 @@
 	<!-- Full Screen Plugin -->
 	<script src="/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
+	<!-- Toastr -->
+	<script src="/plugin/toastr/toastr.min.js"></script>
+
 	<script src="/scripts/main.min.js"></script>
 	<script src="/my-js.js"></script>
 	<script src="/socketnya/client-dist/socket.io.js"></script>
@@ -292,7 +298,6 @@
 		img2.height = 200;
 		document.getElementById('preview-gambar-kurir').appendChild(img2);
 
-		document.getElementById('h5-title').innerHTML = global_data.nama;
 
 		$("#nama").val(global_data.nama);
 		$("#no_telpon").val(global_data.no_telpon);
@@ -300,6 +305,7 @@
 		$("#jenis-kelamin").val(global_data.jenis_kelamin);
 		$("#dd-motor").val(global_data.dd_motor);
 	</script>
+	<script src="/kurir.js"></script>
 
 </body>
 

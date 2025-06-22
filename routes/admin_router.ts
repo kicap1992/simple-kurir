@@ -2,9 +2,13 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import type { UploadedFile } from 'express-fileupload';
+import KirimanModel from '../models/kiriman_model';
 import path from 'path';
 import fs from 'fs';
 import KurirModel from '../models/kurir_model';
+import UserModel from '../models/user_model';
+import axios from 'axios';
+import { socket_client } from '../index';
 
 
 const router = express.Router();
@@ -36,10 +40,10 @@ router.get('/kurir/gambar/:no_telpon/:jenis', (req: Request, res: Response) => {
             return
         }
         // Define file paths
-        const motorGambar = path.join(__dirname, '../images/'+ jenis +'/'+data.gambar_motor);
-        const kurirGambar = path.join(__dirname, '../images/kurir/'+data.gambar_kurir);
+        const motorGambar = path.join(__dirname, '../images/' + jenis + '/' + data.gambar_motor);
+        const kurirGambar = path.join(__dirname, '../images/kurir/' + data.gambar_kurir);
 
-        if(jenis == 'motor') {
+        if (jenis == 'motor') {
             res.sendFile(motorGambar);
         } else {
             res.sendFile(kurirGambar);
@@ -106,7 +110,7 @@ router.post('/kurir', async (req: Request, res: Response) => {
         // Save to MongoDB
         const newKurir = new KurirModel({
             no_telpon,
-            password : no_telpon,           
+            password: no_telpon,
             nama,
             jenis_kelamin,
             dd_motor,
@@ -126,6 +130,173 @@ router.post('/kurir', async (req: Request, res: Response) => {
     }
 });
 
+router.get('/check-kurir/tersedia', (req: Request, res: Response) => {
+    try {
+        // search by status = "Tersedia" || null || undefined
+        KurirModel.find({ status: { $in: ['Tersedia', null, undefined] } }).then((data) => {
+            res.json(data);
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json([]);
+    }
+})
+
+router.get('/paket-baru', async (req: Request, res: Response) => {
+    try {
+        // search by status != "Dibatalkan Oleh Admin"
+        const response = await KirimanModel.find({
+            status: {
+                $nin: ['Dibatalkan Oleh Admin','Paket Telah Diterima Penerima','Diterima Terverifikasi', "Dibatalkan Oleh Pengirim"],
+                $type: 'string'
+            }
+        });
+        // console.log(response);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json([]);
+    }
+})
+
+router.get('/paket-all', async (req: Request, res: Response) => {
+    try {
+        // search by status != "Dibatalkan Oleh Admin"
+        const response = await KirimanModel.find();
+        // console.log(response);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json([]);
+    }
+})
+
+
+router.delete('/batalkan-pengiriman/', async (req: Request, res: Response) => {
+    try {
+        // const { id } = req.params;
+        const { alasan, id } = req.body; // optional reason from admin (e.g., from SweetAlert input)
+        // console.log(id, alasan);
+
+        const updatedDoc = await KirimanModel.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    status: 'Dibatalkan Oleh Admin'
+                },
+                $push: {
+                    timeline: {
+                        status: 'Dibatalkan Oleh Admin',
+                        waktu: new Date(),
+                        alasan: alasan || null
+                    }
+                }
+            },
+            { new: true } // Return the updated document
+        );
+        // console.log(updatedDoc);
+        const userData = await UserModel.findById(updatedDoc?.id_pengirim);
+
+        // console.log(userData)
+        socket_client.emit('pembatalan_paket', updatedDoc);
+
+        try {
+            await axios.post('http://localhost:3012/send-message', { number: userData?.no_telpon, message: `🛵*_Kurir Shenior 🛵_*\nPengiriman anda dengan nomor resi ${updatedDoc?._id} telah dibatalkan oleh admin\nAlasan: *${alasan || 'Belum ada alasan'}* ❌❌` });
+        } catch (err) {
+            console.log(err);
+        }
+
+
+        res.status(200).json("response");
+    } catch (error) {
+        console.log(error);
+        res.status(500).json([]);
+    }
+});
+
+router.post('/tugaskan-kurir', async (req: Request, res: Response) => {
+    const { id_kiriman, id_kurir } = req.body;
+    console.log(id_kiriman, id_kurir);
+    try {
+        const updatedDoc = await KirimanModel.findByIdAndUpdate(
+            id_kiriman,
+            {
+                $set: {
+                    status: 'Kurir Telah Ditugaskan',
+                    id_kurir: id_kurir
+                },
+                $push: {
+                    timeline: {
+                        status: 'Kurir Telah Ditugaskan',
+                        waktu: new Date(),
+                        // alasan: alasan || null
+                    }
+                }
+            },
+            { new: true } // Return the updated document
+        );
+
+        await KurirModel.findByIdAndUpdate(
+            id_kurir,
+            {
+                $set: {
+                    status: 'Ditugaskan'
+                }
+            },
+            { new: true } // Return the updated document
+        );
+
+        console.log(updatedDoc);
+
+        socket_client.emit('tugaskan_kurir_server', updatedDoc);
+
+        try {
+            const userData = await UserModel.findById(updatedDoc?.id_pengirim);
+            const kurirData = await KurirModel.findById(id_kurir);
+            await axios.post('http://localhost:3012/send-message', { number: userData?.no_telpon, message: `🛵 * _Kurir Shenior 🛵_*\nPengiriman anda dengan nomor resi ${updatedDoc?._id} \nStatus : *Kurir Telah DItugaskan*✅✅` });
+            await axios.post('http://localhost:3012/send-message', { number: kurirData?.no_telpon, message: `🛵 *_Kurir Shenior 🛵_*\nAnda telah ditugaskan untuk mengirim paket\nNomor Resi : *${updatedDoc?._id}*\nAlamat Paket : _*${updatedDoc?.alamat_pengirim}* _\nSila buka situs Kurir Shenior dan login untuk detail lebih lanjut ✅✅` });
+        } catch (err) { console.log(err) }
+
+        res.status(200).json(updatedDoc);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json([]);
+    }
+});
+
+
+// ini untuk user
+router.get('/user', (req: Request, res: Response) => {
+    res.sendFile(__dirname + '/admin_ui/user.html');
+});
+
+router.get('/user/data', async (req: Request, res: Response) => {
+    try {
+        const data = await UserModel.find();
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json([]);
+    }
+});
+
+router.get('/user/data/:id', async (req: Request, res: Response) => {
+    const { id } = req.params;
+    console.log(id, "ini id");
+    try {
+        const data = await UserModel.findById(id);
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json([]);
+    }
+});
+
+// ini untuk list penghantaran
+router.get('/list', (req: Request, res: Response) => {
+    res.sendFile(__dirname + '/admin_ui/list.html');
+});
 
 
 router.get('/login', (req: Request, res: Response) => {

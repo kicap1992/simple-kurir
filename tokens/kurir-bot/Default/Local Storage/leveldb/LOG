@@ -1,6 +1,15 @@
-2025/05/16-03:20:33.677 1e9d4 Reusing MANIFEST /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Local Storage/leveldb/MANIFEST-000001
-2025/05/16-03:20:33.747 1e9d4 Recovering log #19
-2025/05/16-03:20:33.748 1e9d4 Reusing old log /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Local Storage/leveldb/000019.log 
-2025/05/16-05:30:49.203 1e9d4 Level-0 table #24: started
-2025/05/16-05:30:49.227 1e9d4 Level-0 table #24: 15501 bytes OK
-2025/05/16-05:30:49.238 1e9d4 Delete type=0 #19
+2025/06/22-15:00:25.988 a0547 Reusing MANIFEST /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Local Storage/leveldb/MANIFEST-000001
+2025/06/22-15:00:26.152 a0547 Recovering log #66
+2025/06/22-15:00:26.164 a0547 Reusing old log /home/ubuntu-cli/bun/kurir-server/tokens/kurir-bot/Default/Local Storage/leveldb/000066.log 
+2025/06/23-00:31:03.382 a0547 Level-0 table #70: started
+2025/06/23-00:31:03.391 a0547 Level-0 table #70: 15590 bytes OK
+2025/06/23-00:31:03.403 a0547 Delete type=0 #66
+2025/06/23-00:31:03.408 a0547 Compacting 4@0 + 1@1 files
+2025/06/23-00:31:03.428 a0547 Generated table #71@0: 267 keys, 7842 bytes
+2025/06/23-00:31:03.428 a0547 Compacted 4@0 + 1@1 files => 7842 bytes
+2025/06/23-00:31:03.451 a0547 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/06/23-00:31:03.452 a0547 Delete type=2 #70
+2025/06/23-00:31:03.452 a0547 Delete type=2 #62
+2025/06/23-00:31:03.452 a0547 Delete type=2 #59
+2025/06/23-00:31:03.452 a0547 Delete type=2 #67
+2025/06/23-00:31:03.452 a0547 Delete type=2 #65

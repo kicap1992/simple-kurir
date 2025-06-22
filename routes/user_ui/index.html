@@ -215,9 +215,9 @@
 	<script src="/socket-io/client-dist/socket.io.js"></script>
 	<script>
 		console.log('hello');
-		const socket = io(); // Connects to your server
+		const socket = io("http://20.20.20.26:3014"); // Connects to your server
 
-		socket.emit('scan_dia', 'Hello from client!');
+		// socket.emit('scan_dia', 'Hello from client!');
 
 		socket.on('connect', () => {
 			console.log('Connected to server:', socket.id);

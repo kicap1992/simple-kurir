@@ -34,7 +34,7 @@
 		<a href="/admin" class="logo">Shenior Kurir</a>
 		<button type="button" class="button-close fa fa-times js__menu_close"></button>
 		<div class="user">
-			<a href="#" class="avatar"><img src="/images/person.png" alt=""><span class="status online"></span></a>
+			<a href="#" class="avatar"><img src="/images/person.png" id="img-avatar" alt="" style="width: 65px; height: 65px;"><span class="status online"></span></a>
 			<h5 class="name"><a href="#" id="h5-title">...</a></h5>
 			<h5 class="position">Pengguna</h5>
 			
@@ -57,10 +57,10 @@
 						<a class="waves-effect" href="/user/kirim-paket"><i class="menu-icon ico mdi mdi-motorbike"></i><span>Pengiriman Paket</span></a>
 					</li>
 
-					 <li>
-                        <a class="waves-effect" href="#" onclick="notAvailable()"><i
-                                class="menu-icon ico icon-table"></i><span>History Pengiriman</span></a>
-                    </li>
+					<li>
+						<a class="waves-effect" href="/user/history" ><i
+								class="menu-icon ico icon-table"></i><span>History Pengiriman</span></a>
+					</li>
 
 					<li>
                         <a class="waves-effect" href="/user/profil" ><i
@@ -200,6 +200,7 @@
 	<script>
 		const global_data = JSON.parse(localStorage.getItem('user'));
 		document.getElementById('h5-title').innerHTML = global_data.nama;
+		$("#img-avatar").attr("src", global_data.gambar == null || global_data.gambar == "" ? "/images/person.png" : "/user/gambar/" + global_data._id + "/" + global_data.gambar);
 	</script>
 
 </body>
